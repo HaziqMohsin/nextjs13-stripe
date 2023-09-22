@@ -2,9 +2,7 @@ import { NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
 
 export async function GET() {
-  const price = await stripe.prices.list({
-    limit: 3,
-  });
+  const price = await stripe.prices.list({});
 
   //   console.log(price);
   //   const data = await res.json();
@@ -24,13 +22,12 @@ export async function POST(request: Request) {
         quantity: 1,
       },
     ],
-
+    // customer: "cus_Of29Hgrkif91zG",
+    customer_email: "priyank@gmail.com",
     mode: "subscription",
-    success_url: `http://localhost:3000/?success=true&session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: "http://localhost:3000?canceled=true",
+    success_url: `http://localhost:3001/thankyou/?success=true&session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: "http://localhost:3001?canceled=true",
   });
-
-  console.log(session.url);
 
   return NextResponse.json(session.url);
   //   return NextResponse.json({ text: "asdasd" });

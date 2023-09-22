@@ -1,15 +1,16 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 type Props = {
   nickname: string;
   unit_amount: number;
   id: string;
+  lookup_key: string;
 };
 
-const ProductCard = ({ nickname, unit_amount, id }: Props) => {
+const ProductCard = ({ nickname, unit_amount, id, lookup_key }: Props) => {
   const handlePayment = async (e: any, id: string) => {
     e.preventDefault();
     // let idx = await id;
